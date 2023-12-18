@@ -13,7 +13,7 @@ async function getClients() {
 export default async function TabClients() {
   const clients = await getClients();
   
-  console.log(clients);
+  // console.log(clients);
 
   return (
     <div className="overflow-x-auto">
