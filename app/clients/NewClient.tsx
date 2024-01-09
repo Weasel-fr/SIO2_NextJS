@@ -1,10 +1,16 @@
 "use client";
 
 import { PrismaClient } from "@prisma/client";
+import type { Client } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-async function addClient(formData: FormData) {
+
+
+export default function NewClient(props: {newClient:Function}) {
+
+  async function addClient(formData: FormData) {
+    // appel de l'api pour mettre le nouveau client en base
     const response = await fetch("/api/clients", {
       method: "POST",
       body: JSON.stringify({
@@ -13,9 +19,10 @@ async function addClient(formData: FormData) {
         password: formData.get("password"),
       }),
       });
-  }
 
-export default function NewClient() {
+      const client:Client = await response.json();
+      props.newClient(client);
+  }
 
   return (
     <form className="m-20" action={addClient}>

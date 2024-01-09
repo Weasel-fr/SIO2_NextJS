@@ -22,6 +22,10 @@ export default function Clients() {
     setChargementOk(true);
   }, []);
 
+  function nouveauClient(client: Client) {
+    setClients([...clients, client]);
+  }
+
   return (
     <>
       <h1 className="m-10">Clients</h1>
@@ -32,7 +36,7 @@ export default function Clients() {
           <div className="skeleton w-32 h-32"></div>
         )}
       </div>
-      <NewClient />
+      <NewClient newClient={nouveauClient}/>
     </>
   );
 }
