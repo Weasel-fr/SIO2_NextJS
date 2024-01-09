@@ -1,16 +1,20 @@
+"use client";
+
 import { PrismaClient } from "@prisma/client";
+import { json } from "stream/consumers";
 
 const prisma = new PrismaClient();
 
 async function addClient(formData: FormData) {
-    "use server";
-    const client = await prisma.client.create({
-      data: {
-        name: formData.get("name")!.toString(),
-        email: formData.get("email")!.toString(),
-        password: formData.get("password")!.toString(),
-      },
-    });
+    const response = await fetch("/api/clients", {
+      method: "POST",
+      body: JSON.stringify({
+        name: formData.get("name"),
+        email: formData.get("email"),
+        password: formData.get("password"),
+      }),
+      });
+    console.log(response);
   }
 
 export default function NewClient() {
