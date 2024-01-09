@@ -1,7 +1,6 @@
 "use client";
 
 import { PrismaClient } from "@prisma/client";
-import { json } from "stream/consumers";
 
 const prisma = new PrismaClient();
 
@@ -14,7 +13,6 @@ async function addClient(formData: FormData) {
         password: formData.get("password"),
       }),
       });
-    console.log(response);
   }
 
 export default function NewClient() {

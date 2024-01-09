@@ -1,19 +1,12 @@
+"use client";
+
 import { PrismaClient } from "@prisma/client";
 import RowClient from "./RowClient";
-// import type { Client } from "@prisma/client";
+import type { Client } from "@prisma/client";
  
 const prisma = new PrismaClient();
 
-//avec type : async function getClients():Promise<Client[]> {
-async function getClients() {
-  const clients = await prisma.client.findMany();
-  return clients;
-}
-
-export default async function TabClients() {
-  const clients = await getClients();
-  
-  // console.log(clients);
+export default function TabClients(props: {clients:Client[]}) {
 
   return (
     <div className="overflow-x-auto">
@@ -29,7 +22,7 @@ export default async function TabClients() {
         </thead>
         <tbody>
           {/* avec typage : clients.map((c:Client)=>...) */}
-          {clients.map((c) => (
+          {props.clients.map((c) => (
             <RowClient key={c.id} client={c}/>
           ))}
         </tbody>
